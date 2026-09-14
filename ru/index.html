@@ -52,5 +52,31 @@
 <section class="section" id="channels"><div class="wrap"><div class="center"><div class="eyebrow">Будьте на связи</div><h2>Находите TubeMind AI там, где вы учитесь.</h2><p class="lead">Следите за проектом, смотрите примеры и узнавайте о новых обновлениях.</p></div><div class="channels"><article class="channel"><h3>Chrome Web Store</h3><p>Установите официальное расширение TubeMind AI и попробуйте его на YouTube.</p><a class="button" href="https://chromewebstore.google.com/detail/bkmmiijignhokjblbjoafabollhgjdkk?hl=en" target="_blank" rel="noopener">Установить расширение ↗</a></article><article class="channel"><h3>TubeMind AI в Telegram</h3><p>Новости продукта, обновления и практические примеры в одном месте.</p><a class="button" href="https://t.me/tubemindai_tools" target="_blank" rel="noopener">Открыть канал ↗</a></article><article class="channel"><h3>Смотреть демонстрацию</h3><p>Посмотрите, как работают поиск по расшифровке и таймкоды, до установки.</p><a class="button" href="https://www.youtube.com/watch?v=oX7OduG1YmI" target="_blank" rel="noopener">Откройте YouTube ↗</a></article></div><div class="final"><div class="eyebrow">Ready when you are</div><h2>Не пересматривайте снова.<br><span class="grad">Начните понимать.</span></h2><p class="lead" style="margin:0 auto 25px">Превратите следующее видео YouTube в знания, которыми можно пользоваться.</p><a class="button" href="https://chromewebstore.google.com/detail/bkmmiijignhokjblbjoafabollhgjdkk?hl=en" target="_blank" rel="noopener">Открыть TubeMind AI free ↗</a></div></div></section>
 </main>
 <footer class="wrap footer"><span>© 2026 TubeMind AI</span><span><a href="./privacy.html">Политика конфиденциальности</a> · <a href="https://tubemindai.com/">tubemindai.com</a></span></footer>
+<script>
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest('a[href]');
+    if (!link || typeof gtag !== 'function') return;
+    const href = link.href || '';
+    let eventName = '';
+    let eventLabel = '';
+    if (href.includes('chromewebstore.google.com/detail/bkmmiijignhokjblbjoafabollhgjdkk')) {
+      eventName = 'store_click';
+      eventLabel = 'Chrome Web Store';
+    } else if (href.includes('youtube.com/watch?v=oX7OduG1YmI')) {
+      eventName = 'demo_click';
+      eventLabel = 'YouTube demo';
+    } else if (href.includes('t.me/tubemindai_tools')) {
+      eventName = 'telegram_click';
+      eventLabel = 'Telegram channel';
+    }
+    if (eventName) {
+      gtag('event', eventName, {
+        event_category: 'engagement',
+        event_label: eventLabel,
+        page_language: document.documentElement.lang
+      });
+    }
+  });
+</script>
 </body>
 </html>
