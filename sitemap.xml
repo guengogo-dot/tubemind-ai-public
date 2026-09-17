@@ -2,12 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tubemindai.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-09-17</lastmod>
   </url>
   <url>
     <loc>https://tubemindai.com/ru/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tubemindai.com/guides/</loc>
+    <lastmod>2026-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tubemindai.com/guides/youtube-transcript-search/</loc>
+    <lastmod>2026-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tubemindai.com/guides/youtube-transcript-with-timestamps/</loc>
+    <lastmod>2026-09-17</lastmod>
+  </url>
+  <url>
+    <loc>https://tubemindai.com/guides/youtube-ai-summary/</loc>
+    <lastmod>2026-09-17</lastmod>
   </url>
 </urlset>
