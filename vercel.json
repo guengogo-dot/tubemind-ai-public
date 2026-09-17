@@ -10,6 +10,486 @@
       ],
       "destination": "https://tubemindai.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/go/fb/01",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/01",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/01",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/01",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/01",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/01",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/01",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/01",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/01",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/01",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/01",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/01",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-01_day01",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/02",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/02",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/02",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/02",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/02",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/02",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/02",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/02",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/02",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/02",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/02",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/02",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-02_day02",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/03",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/03",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/03",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/03",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/03",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/03",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/03",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/03",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/03",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/03",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/03",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/03",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-03_day03",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/04",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/04",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/04",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/04",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/04",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/04",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/04",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/04",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/04",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/04",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/04",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/04",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-04_day04",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/05",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/05",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/05",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/05",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/05",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/05",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/05",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/05",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/05",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/05",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/05",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/05",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-05_day05",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/06",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/06",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/06",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/06",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/06",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/06",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/06",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/06",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/06",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/06",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/06",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/06",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-06_day06",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/07",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/07",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/07",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/07",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/07",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/07",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/07",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/07",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/07",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/07",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/07",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/07",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-07-slideshow_day07",
+      "permanent": false
+    },
+    {
+      "source": "/go/fb/08",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/ig/08",
+      "destination": "https://tubemindai.com/?utm_source=instagram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/tt/08",
+      "destination": "https://tubemindai.com/?utm_source=tiktok&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/yt/08",
+      "destination": "https://tubemindai.com/?utm_source=youtube&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/tg/08",
+      "destination": "https://tubemindai.com/?utm_source=telegram&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/dz/08",
+      "destination": "https://tubemindai.com/?utm_source=dzen_via_telegram_bot&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/li/08",
+      "destination": "https://tubemindai.com/?utm_source=linkedin&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/x/08",
+      "destination": "https://tubemindai.com/?utm_source=x&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/pt/08",
+      "destination": "https://tubemindai.com/?utm_source=patreon&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/vk/08",
+      "destination": "https://tubemindai.com/?utm_source=vk&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/bs/08",
+      "destination": "https://tubemindai.com/?utm_source=bluesky&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
+    },
+    {
+      "source": "/go/th/08",
+      "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
+      "permanent": false
     }
   ]
 }
