@@ -27,3 +27,12 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: test -s auth.js
+      - name: Upload DEV-only bundle for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: tubemind-dev-oauth-bundle
+          path: |
+            dev-oauth/index.html
+            dev-oauth/auth.js
+          if-no-files-found: error
+          retention-days: 7
