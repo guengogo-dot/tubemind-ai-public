@@ -491,5 +491,7 @@
       "destination": "https://tubemindai.com/?utm_source=facebook&utm_medium=organic_social&utm_campaign=tubemind_launch_2026&utm_content=day-08-full_day08",
       "permanent": false
     }
-  ]
+  ],
+  "buildCommand": "cd dev-oauth && npm install --no-audit --no-fund && npm run check && npm run build",
+  "outputDirectory": "."
 }
