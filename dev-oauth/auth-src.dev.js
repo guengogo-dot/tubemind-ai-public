@@ -69,7 +69,7 @@ async function completeExtensionSignIn() {
     const token = await neonAuth.getJWTToken();
     if (!token) throw new Error("Secure token was not issued");
     stage = "proxy-issue";
-    const response = await fetch("/api/tubemind-auth-exchange", {
+    const response = await fetch("/api/dev-auth-exchange?action=issue", {
       method: "POST",
       headers: { authorization: "Bearer " + token, "content-type": "application/json" },
       body: "{}",
