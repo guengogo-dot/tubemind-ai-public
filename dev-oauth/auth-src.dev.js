@@ -3,7 +3,8 @@
 import { createInternalNeonAuth } from "@neondatabase/neon-js/auth";
 
 const AUTH = "https://ep-square-cake-b2a4fj1w.neonauth.c-6.eu-central-1.aws.neon.tech/neondb/auth";
-const CALLBACK = "https://tubemindai.com/auth/";
+// Keep the OAuth return on this isolated DEV origin, never on the production site.
+const CALLBACK = new URL(location.pathname, location.origin).toString();
 const neonAuth = createInternalNeonAuth(AUTH, { fetchOptions: { credentials: "include" } });
 const auth = neonAuth.adapter;
 const status = document.getElementById("status");
@@ -84,7 +85,7 @@ async function completeExtensionSignIn() {
     stage = "redirect";
     const redirect = new URL(flow.callback);
     redirect.searchParams.set("code", issued.code);
-    clearFlow();
+    // Keep flow until navigation succeeds; one-time exchange codes expire quickly.
     location.replace(redirect.toString());
     return true;
   } catch (error) {
