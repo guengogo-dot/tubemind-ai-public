@@ -1,0 +1,15 @@
+{
+  "name": "tubemind-dev-oauth-preview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild auth-src.dev.js --bundle --platform=browser --format=esm --target=es2022 --outfile=auth.js",
+    "check": "node check-source.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/neon-js": "latest"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
