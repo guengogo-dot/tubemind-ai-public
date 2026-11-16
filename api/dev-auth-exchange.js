@@ -27,6 +27,14 @@ async function verifyJwt(token) {
   return payload;
 }
 export default async function handler(req, res) {
+  const allowedOrigin = "chrome-extension://ijiihdnkpfngnnoodnnliokgklkondnj";
+  if (req.headers.origin === allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  }
+  if (req.method === "OPTIONS") return res.status(req.headers.origin === allowedOrigin ? 204 : 403).end();
   if (req.method !== "POST") return reply(res, 405, {error:"method_not_allowed"});
   if (!pool) return reply(res, 503, {error:"dev_database_not_configured"});
   const action = req.query?.action;
