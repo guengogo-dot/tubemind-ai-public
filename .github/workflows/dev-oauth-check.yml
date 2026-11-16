@@ -1,0 +1,29 @@
+name: TubeMind DEV OAuth source checks
+
+on:
+  push:
+    branches:
+      - fix/dev-oauth-callback-0.3.0
+    paths:
+      - 'dev-oauth/**'
+      - '.github/workflows/dev-oauth-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dev-oauth
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npm run check
+      - run: npm run build
+      - run: test -s auth.js
