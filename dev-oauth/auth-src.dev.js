@@ -2,7 +2,7 @@
 // Reconstructed from the owner's Vercel auth-src.js, 2026-11-17.
 import { createInternalNeonAuth } from "@neondatabase/neon-js/auth";
 
-const AUTH = "https://ep-square-cake-b2a4fj1w.neonauth.c-6.eu-central-1.aws.neon.tech/neondb/auth";
+const AUTH = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.tech/neondb/auth";
 // Keep the OAuth return on this isolated DEV origin, never on the production site.
 const CALLBACK = new URL(location.pathname, location.origin).toString();
 const DEV_EXTENSION_ID = "ijiihdnkpfngnnoodnnliokgklkondnj";
