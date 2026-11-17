@@ -1,6 +1,11 @@
 name: Configure isolated DEV OAuth database in Vercel Preview
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - fix/dev-oauth-callback-0.3.0
+    paths:
+      - .github/workflows/dev-oauth-preview-env.yml
 permissions:
   contents: read
 jobs:
