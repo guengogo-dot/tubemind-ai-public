@@ -26,26 +26,33 @@ jobs:
           project="prj_IC3mGdO1XuxxKZLFgJxGc9t7qpzM"
           branch="fix/dev-oauth-callback-0.3.0"
           headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"}
-          def call(method,path,data=None):
+          def call(method,path,data=None,stage='unknown'):
               req=urllib.request.Request("https://api.vercel.com"+path,data=json.dumps(data).encode() if data is not None else None,headers=headers,method=method)
               try:
                   with urllib.request.urlopen(req,timeout=45) as response:
                       return json.load(response)
               except urllib.error.HTTPError as exc:
-                  print("BLOCKED: Vercel HTTP",exc.code)
+                  print("BLOCKED: Vercel stage",stage,"HTTP",exc.code)
+                  try:
+                      error=json.loads(exc.read(8192)).get("error",{})
+                      code=error.get("code","unknown")
+                      if isinstance(code,str) and len(code)<80 and all(ch.isalnum() or ch in "_-" for ch in code):
+                          print("Vercel error code:",code)
+                  except (ValueError,UnicodeDecodeError,AttributeError):
+                      pass
                   sys.exit(1)
-          info=call("GET",f"/v9/projects/{project}?teamId={team}")
+          info=call("GET",f"/v9/projects/{project}?teamId={team}",stage="project-identity")
           if info.get("id")!=project or info.get("name")!="tubemind-ai-public":sys.exit("BLOCKED: project identity mismatch")
-          envs=call("GET",f"/v9/projects/{project}/env?teamId={team}").get("envs",[])
+          envs=call("GET",f"/v9/projects/{project}/env?teamId={team}",stage="branch-env-readback").get("envs",[])
           if not any(e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[]) for e in envs):sys.exit("BLOCKED: branch-scoped DEV_DATABASE_URL absent")
           payload={"name":"tubemind-ai-public","project":project,"target":"preview","gitSource":{"type":"github","org":"guengogo-dot","repo":"tubemind-ai-public","ref":branch},"meta":{"purpose":"dev-oauth-030-only"}}
-          deployment=call("POST",f"/v13/deployments?teamId={team}&forceNew=1",payload)
+          deployment=call("POST",f"/v13/deployments?teamId={team}&forceNew=1",payload,stage="create-preview-deployment")
           deployment_id=deployment.get("id")
           if not deployment_id:sys.exit("BLOCKED: deployment ID missing")
           print("DEV deployment ID:",deployment_id)
           print("DEV deployment URL:",deployment.get("url","pending"))
           for attempt in range(35):
-              state=call("GET",f"/v13/deployments/{deployment_id}?teamId={team}")
+              state=call("GET",f"/v13/deployments/{deployment_id}?teamId={team}",stage="deployment-poll")
               status=state.get("readyState") or state.get("status") or "UNKNOWN"
               print("DEV state:",status,flush=True)
               if status=="READY":
