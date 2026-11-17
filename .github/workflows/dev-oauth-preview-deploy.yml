@@ -1,0 +1,58 @@
+name: Deploy TubeMind DEV OAuth Preview
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - fix/dev-oauth-callback-0.3.0
+    paths:
+      - .github/workflows/dev-oauth-preview-deploy.yml
+permissions:
+  contents: read
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/fix/dev-oauth-callback-0.3.0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger isolated DEV Preview deployment and verify status
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${VERCEL_TOKEN:-}" || { echo "BLOCKED: VERCEL_TOKEN missing"; exit 1; }
+          python3 - <<'PY'
+          import json,os,sys,time,urllib.request,urllib.error
+          token=os.environ["VERCEL_TOKEN"]
+          team="team_bH8lyDpph5Xp7xm5d5wTrbTy"
+          project="prj_IC3mGdO1XuxxKZLFgJxGc9t7qpzM"
+          branch="fix/dev-oauth-callback-0.3.0"
+          headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"}
+          def call(method,path,data=None):
+              req=urllib.request.Request("https://api.vercel.com"+path,data=json.dumps(data).encode() if data is not None else None,headers=headers,method=method)
+              try:
+                  with urllib.request.urlopen(req,timeout=45) as response:
+                      return json.load(response)
+              except urllib.error.HTTPError as exc:
+                  print("BLOCKED: Vercel HTTP",exc.code)
+                  sys.exit(1)
+          info=call("GET",f"/v9/projects/{project}?teamId={team}")
+          if info.get("id")!=project or info.get("name")!="tubemind-ai-public":sys.exit("BLOCKED: project identity mismatch")
+          envs=call("GET",f"/v9/projects/{project}/env?teamId={team}").get("envs",[])
+          if not any(e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[]) for e in envs):sys.exit("BLOCKED: branch-scoped DEV_DATABASE_URL absent")
+          payload={"name":"tubemind-ai-public","project":project,"target":"preview","gitSource":{"type":"github","org":"guengogo-dot","repo":"tubemind-ai-public","ref":branch},"meta":{"purpose":"dev-oauth-030-only"}}
+          deployment=call("POST",f"/v13/deployments?teamId={team}&forceNew=1",payload)
+          deployment_id=deployment.get("id")
+          if not deployment_id:sys.exit("BLOCKED: deployment ID missing")
+          print("DEV deployment ID:",deployment_id)
+          print("DEV deployment URL:",deployment.get("url","pending"))
+          for attempt in range(35):
+              state=call("GET",f"/v13/deployments/{deployment_id}?teamId={team}")
+              status=state.get("readyState") or state.get("status") or "UNKNOWN"
+              print("DEV state:",status,flush=True)
+              if status=="READY":
+                  print("PASS: isolated DEV Preview deployment READY")
+                  sys.exit(0)
+              if status in ("ERROR","CANCELED","BLOCKED"):
+                  sys.exit("BLOCKED: DEV deployment "+status)
+              time.sleep(12)
+          sys.exit("BLOCKED: DEV deployment not READY within polling window")
+          PY
