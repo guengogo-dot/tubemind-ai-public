@@ -1,0 +1,61 @@
+name: Configure isolated DEV OAuth database in Vercel Preview
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  configure-dev:
+    if: github.ref == 'refs/heads/fix/dev-oauth-callback-0.3.0'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify DEV-only secret availability
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEV_DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          test -n "${VERCEL_TOKEN:-}" || { echo "BLOCKED: VERCEL_TOKEN missing"; exit 1; }
+          test -n "${DEV_DATABASE_URL:-}" || { echo "BLOCKED: DEV_DATABASE_URL missing"; exit 1; }
+          case "$DEV_DATABASE_URL" in
+            postgres://*|postgresql://*) ;;
+            *) echo "BLOCKED: invalid database URL scheme"; exit 1 ;;
+          esac
+          echo "DEV secrets present (values not printed)"
+      - name: Set branch-scoped Preview environment variable
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEV_DATABASE_URL: ${{ secrets.DEV_DATABASE_URL }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request, urllib.error, sys
+          base="https://api.vercel.com"
+          project="prj_IC3mGdO1XuxxKZLFgJxGc9t7qpzM"
+          team="team_bH8lyDpph5Xp7xm5d5wTrbTy"
+          branch="fix/dev-oauth-callback-0.3.0"
+          token=os.environ["VERCEL_TOKEN"]
+          headers={"Authorization":"Bearer "+token,"Content-Type":"application/json"}
+          def call(method, path, data=None):
+              req=urllib.request.Request(base+path, data=json.dumps(data).encode() if data is not None else None, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(req,timeout=25) as response:
+                      return response.status, json.load(response)
+              except urllib.error.HTTPError as exc:
+                  print("Vercel API rejected request: HTTP",exc.code)
+                  sys.exit(1)
+          status,project_info=call("GET",f"/v9/projects/{project}?teamId={team}")
+          if project_info.get("id") != project:
+              sys.exit("BLOCKED: project ID mismatch")
+          status,envs=call("GET",f"/v9/projects/{project}/env?teamId={team}")
+          existing=[e for e in envs.get("envs",[]) if e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[])]
+          if existing:
+              print("BLOCKED: branch-scoped DEV_DATABASE_URL already exists; refusing to overwrite")
+              sys.exit(1)
+          payload={"key":"DEV_DATABASE_URL","value":os.environ["DEV_DATABASE_URL"],"type":"encrypted","target":["preview"],"gitBranch":branch}
+          status,created=call("POST",f"/v10/projects/{project}/env?teamId={team}",payload)
+          if not any(e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch for e in ([created] if isinstance(created,dict) else created)):
+              print("Vercel accepted environment variable creation; verify via readback")
+          status,envs=call("GET",f"/v9/projects/{project}/env?teamId={team}")
+          matches=[e for e in envs.get("envs",[]) if e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[])]
+          if len(matches)!=1: sys.exit("BLOCKED: readback failed")
+          print("PASS: DEV_DATABASE_URL exists only for designated Preview branch")
+          PY
