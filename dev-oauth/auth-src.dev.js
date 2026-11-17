@@ -6,6 +6,7 @@ const AUTH = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.te
 // Keep the OAuth return on this isolated DEV origin, never on the production site.
 const CALLBACK = new URL(location.pathname, location.origin).toString();
 const DEV_EXTENSION_ID = "ijiihdnkpfngnnoodnnliokgklkondnj";
+const DEV_EXTENSION_ID_CURRENT = "gddjodeedjcpllaphchfjmfleiegncdc";
 const neonAuth = createInternalNeonAuth(AUTH, { fetchOptions: { credentials: "include" } });
 const auth = neonAuth.adapter;
 const status = document.getElementById("status");
@@ -14,6 +15,7 @@ const params = new URLSearchParams(location.search);
 const extensionCallback = params.get("extension_callback");
 const CALLBACKS = new Set([
   `https://${DEV_EXTENSION_ID}.chromiumapp.org/tubemind-auth`,
+  `https://${DEV_EXTENSION_ID_CURRENT}.chromiumapp.org/tubemind-auth`,
 ]);
 const FLOW_KEY = "tubemind.extensionAuthFlow";
 const FLOW_TTL_MS = 10 * 60 * 1000;
