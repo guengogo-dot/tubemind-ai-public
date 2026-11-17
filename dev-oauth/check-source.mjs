@@ -5,6 +5,8 @@ const source = readFileSync(new URL("./auth-src.dev.js", import.meta.url), "utf8
 const beta = "https://ijiihdnkpfngnnoodnnliokgklkondnj.chromiumapp.org/tubemind-auth";
 const stable = "https://bkmmiijignhokjblbjoafabollhgjdkk.chromiumapp.org/tubemind-auth";
 assert.ok(source.includes("const DEV_EXTENSION_ID = \"ijiihdnkpfngnnoodnnliokgklkondnj\""), "DEV extension ID must be pinned");
+assert.ok(source.includes("const DEV_EXTENSION_ID_CURRENT = \"gddjodeedjcpllaphchfjmfleiegncdc\""), "current unpacked DEV extension ID must be allowed");
+assert.ok(source.includes("`https://${DEV_EXTENSION_ID_CURRENT}.chromiumapp.org/tubemind-auth`"), "current DEV callback must be allowlisted");
 assert.ok(source.includes("chromiumapp.org/tubemind-auth"), "Chrome identity callback must be present");
 assert.ok(!source.includes(stable), "DEV bridge must never redirect codes to the stable extension");
 assert.ok(!source.includes("https://jiihdnkpfngnnoodnnliokgklko.chromiumapp.org"), "broken callback must be removed");
