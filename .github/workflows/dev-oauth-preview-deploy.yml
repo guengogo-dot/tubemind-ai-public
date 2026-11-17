@@ -20,7 +20,7 @@ jobs:
           set -euo pipefail
           test -n "${VERCEL_TOKEN:-}" || { echo "BLOCKED: VERCEL_TOKEN missing"; exit 1; }
           python3 - <<'PY'
-          import json,os,sys,time,urllib.request,urllib.error
+          import json,os,sys,time,re,urllib.request,urllib.error
           token=os.environ["VERCEL_TOKEN"]
           team="team_bH8lyDpph5Xp7xm5d5wTrbTy"
           project="prj_IC3mGdO1XuxxKZLFgJxGc9t7qpzM"
@@ -38,6 +38,13 @@ jobs:
                       code=error.get("code","unknown")
                       if isinstance(code,str) and len(code)<80 and all(ch.isalnum() or ch in "_-" for ch in code):
                           print("Vercel error code:",code)
+                          if stage=="create-preview-deployment":
+                              msg=error.get("message","")
+                              if isinstance(msg,str):
+                                  msg=re.sub(r"https?://\\S+","[URL]",msg)
+                                  msg=re.sub(r"(?i)(token|password|secret|authorization|postgres(?:ql)?)[^\\s,;]*","[REDACTED]",msg)
+                                  msg=re.sub(r"[A-Za-z0-9_\\-]{48,}","[REDACTED]",msg)
+                                  print("Vercel validation message:",msg[:300])
                   except (ValueError,UnicodeDecodeError,AttributeError):
                       pass
                   sys.exit(1)
