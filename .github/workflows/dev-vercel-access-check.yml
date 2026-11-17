@@ -1,0 +1,30 @@
+name: DEV Vercel access diagnostics
+on:
+  push:
+    branches: [fix/dev-oauth-callback-0.3.0]
+    paths: ['.github/workflows/dev-vercel-access-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify existing secret and DEV project access (read-only)
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${VERCEL_TOKEN:-}" ]; then
+            echo "BLOCKED: VERCEL_TOKEN is not available to this workflow"
+            exit 1
+          fi
+          status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+            --header "Authorization: Bearer ${VERCEL_TOKEN}" \
+            "https://api.vercel.com/v9/projects/prj_IC3mGdO1XuxxKZLFgJxGc9t7qpzM?teamId=team_bH8lyDpph5Xp7xm5d5wTrbTy")
+          echo "DEV project access HTTP status: ${status}"
+          if [ "${status}" != "200" ]; then
+            echo "BLOCKED: existing GitHub token cannot read intended Vercel project"
+            exit 1
+          fi
+          echo "PASS: existing GitHub token can read intended Vercel project"
