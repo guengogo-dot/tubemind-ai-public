@@ -6,6 +6,9 @@ on:
       - fix/dev-oauth-callback-0.3.0
     paths:
       - 'dev-oauth/**'
+      - 'api/dev-auth-exchange.js'
+      - 'package.json'
+      - 'vercel.json'
       - '.github/workflows/dev-oauth-check.yml'
   workflow_dispatch:
 
@@ -23,6 +26,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check DEV server API syntax
+        working-directory: .
+        run: node --check api/dev-auth-exchange.js
       - run: npm install --no-audit --no-fund
       - run: npm run check
       - run: npm run build
