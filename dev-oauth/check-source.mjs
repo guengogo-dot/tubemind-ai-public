@@ -14,5 +14,5 @@ assert.ok(source.includes("const CALLBACK = new URL(location.pathname, location.
 assert.ok(source.includes("void startGoogleSignIn()"), "extension flow must start automatically");
 assert.ok(source.includes("params.has(\"neon_auth_session_verifier\")"), "OAuth verifier return must be handled");
 assert.ok(source.includes("readFlow()"), "OAuth flow must be recovered from storage");
-assert.ok(source.includes('fetch("/api/tubemind-auth-exchange"'), "code issue endpoint must remain intact");
+assert.ok(source.includes('fetch("/api/dev-auth-exchange?action=issue"'), "code issue endpoint must remain intact");
 console.log("DEV OAuth source invariants: PASS (static only; browser OAuth not tested)");
