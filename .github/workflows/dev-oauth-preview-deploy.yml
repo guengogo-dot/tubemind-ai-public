@@ -1,6 +1,13 @@
 name: Deploy TubeMind DEV OAuth Preview
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - fix/dev-oauth-callback-0.3.0
+    paths:
+      - dev-oauth/**
+      - api/dev-auth-exchange.js
+      - .github/workflows/dev-oauth-preview-deploy.yml
 permissions:
   contents: read
 concurrency:
