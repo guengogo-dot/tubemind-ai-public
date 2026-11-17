@@ -1,13 +1,11 @@
 name: Deploy TubeMind DEV OAuth Preview
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - fix/dev-oauth-callback-0.3.0
-    paths:
-      - .github/workflows/dev-oauth-preview-deploy.yml
 permissions:
   contents: read
+concurrency:
+  group: tubemind-dev-oauth-preview
+  cancel-in-progress: false
 jobs:
   deploy-dev:
     if: github.ref == 'refs/heads/fix/dev-oauth-callback-0.3.0'
@@ -53,7 +51,7 @@ jobs:
           envs=call("GET",f"/v9/projects/{project}/env?teamId={team}",stage="branch-env-readback").get("envs",[])
           if not any(e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[]) for e in envs):sys.exit("BLOCKED: branch-scoped DEV_DATABASE_URL absent")
           payload={"name":"tubemind-ai-public","project":project,"gitSource":{"type":"github","org":"guengogo-dot","repo":"tubemind-ai-public","ref":branch},"meta":{"purpose":"dev-oauth-030-only"}}
-          deployment=call("POST",f"/v13/deployments?teamId={team}&forceNew=1",payload,stage="create-preview-deployment")
+          deployment=call("POST",f"/v13/deployments?teamId={team}",payload,stage="create-preview-deployment")
           deployment_id=deployment.get("id")
           if not deployment_id:sys.exit("BLOCKED: deployment ID missing")
           if deployment.get("target")=="production":sys.exit("BLOCKED: unexpected production deployment")
