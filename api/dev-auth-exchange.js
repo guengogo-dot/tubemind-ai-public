@@ -41,7 +41,7 @@ export default async function handler(req, res) {
   if (action !== "issue" && action !== "redeem") return reply(res, 404, {error:"unknown_action"});
   try {
     if (action === "issue") {
-      const match = /^Bearer\\s+(.+)$/i.exec(req.headers.authorization || "");
+      const match = /^Bearer\s+(.+)$/i.exec(req.headers.authorization || "");
       if (!match) return reply(res,401,{error:"authentication_required"});
       const payload = await verifyJwt(match[1]);
       const {randomBytes} = await import("node:crypto");
