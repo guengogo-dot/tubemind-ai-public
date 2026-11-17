@@ -492,6 +492,6 @@
       "permanent": false
     }
   ],
-  "buildCommand": "cd dev-oauth && npm install --no-audit --no-fund && npm run check && npm run build",
+  "buildCommand": "npm install --no-audit --no-fund && cd dev-oauth && npm install --no-audit --no-fund && npm run check && npm run build",
   "outputDirectory": "."
 }
