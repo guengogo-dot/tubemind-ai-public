@@ -52,10 +52,11 @@ jobs:
           if info.get("id")!=project or info.get("name")!="tubemind-ai-public":sys.exit("BLOCKED: project identity mismatch")
           envs=call("GET",f"/v9/projects/{project}/env?teamId={team}",stage="branch-env-readback").get("envs",[])
           if not any(e.get("key")=="DEV_DATABASE_URL" and e.get("gitBranch")==branch and "preview" in e.get("target",[]) for e in envs):sys.exit("BLOCKED: branch-scoped DEV_DATABASE_URL absent")
-          payload={"name":"tubemind-ai-public","project":project,"target":"preview","gitSource":{"type":"github","org":"guengogo-dot","repo":"tubemind-ai-public","ref":branch},"meta":{"purpose":"dev-oauth-030-only"}}
+          payload={"name":"tubemind-ai-public","project":project,"gitSource":{"type":"github","org":"guengogo-dot","repo":"tubemind-ai-public","ref":branch},"meta":{"purpose":"dev-oauth-030-only"}}
           deployment=call("POST",f"/v13/deployments?teamId={team}&forceNew=1",payload,stage="create-preview-deployment")
           deployment_id=deployment.get("id")
           if not deployment_id:sys.exit("BLOCKED: deployment ID missing")
+          if deployment.get("target")=="production":sys.exit("BLOCKED: unexpected production deployment")
           print("DEV deployment ID:",deployment_id)
           print("DEV deployment URL:",deployment.get("url","pending"))
           for attempt in range(35):
@@ -63,6 +64,7 @@ jobs:
               status=state.get("readyState") or state.get("status") or "UNKNOWN"
               print("DEV state:",status,flush=True)
               if status=="READY":
+                  if state.get("target")=="production":sys.exit("BLOCKED: deployment is production")
                   print("PASS: isolated DEV Preview deployment READY")
                   sys.exit(0)
               if status in ("ERROR","CANCELED","BLOCKED"):
