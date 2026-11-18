@@ -14,16 +14,19 @@ function reply(res, status, body) {
 }
 async function verifyJwt(token) {
   const parts = token.split(".");
-  if (parts.length !== 3) throw Error("invalid_token");
+  if (parts.length !== 3) throw Error("invalid_token_format");
   const header = JSON.parse(Buffer.from(parts[0], "base64url").toString());
   const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString());
-  if (header.alg !== "EdDSA" || !header.kid || !payload.sub || payload.iss !== ISSUER ||
-      typeof payload.exp !== "number" || payload.exp <= Date.now()/1000) throw Error("invalid_token");
+  if (header.alg !== "EdDSA" || !header.kid) throw Error("invalid_token_header");
+  if (!payload.sub) throw Error("invalid_token_subject");
+  if (payload.iss !== ISSUER) throw Error("invalid_token_issuer");
+  if (typeof payload.exp !== "number" || payload.exp <= Date.now()/1000) throw Error("invalid_token_expired");
   const response = await fetch(JWKS);
   if (!response.ok) throw Error("jwks_unavailable");
   const keys = (await response.json()).keys || [];
   const key = keys.find(k => k.kid === header.kid);
-  if (!key || !verify(null, Buffer.from(parts[0]+"."+parts[1]), createPublicKey({key,format:"jwk"}), Buffer.from(parts[2],"base64url"))) throw Error("invalid_token");
+  if (!key) throw Error("invalid_token_key");
+  if (!verify(null, Buffer.from(parts[0]+"."+parts[1]), createPublicKey({key,format:"jwk"}), Buffer.from(parts[2],"base64url"))) throw Error("invalid_token_signature");
   return payload;
 }
 export default async function handler(req, res) {
@@ -61,7 +64,10 @@ export default async function handler(req, res) {
     if (!result.rows.length) return reply(res,400,{error:"invalid_or_expired_code"});
     return reply(res,200,{accessToken:result.rows[0].access_token});
   } catch (e) {
-    if (e.message === "invalid_token") return reply(res,401,{error:"invalid_session"});
+    if (typeof e.message === "string" && e.message.startsWith("invalid_token")) {
+      console.warn("DEV OAuth JWT verification failed:", e.message);
+      return reply(res,401,{error:"invalid_session"});
+    }
     console.error("DEV OAuth exchange failed:",e.message);
     return reply(res,500,{error:"dev_exchange_failed"});
   }
