@@ -3,7 +3,7 @@ import { createHash, createPublicKey, verify } from "node:crypto";
 import pg from "pg";
 
 const JWKS = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.tech/neondb/auth/.well-known/jwks.json";
-const ISSUER = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.tech/neondb/auth";
+const ISSUER = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.tech";
 const TTL_MS = 60_000;
 const pool = process.env.DEV_DATABASE_URL ? new pg.Pool({ connectionString: process.env.DEV_DATABASE_URL, max: 2 }) : null;
 
