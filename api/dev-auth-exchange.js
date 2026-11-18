@@ -19,7 +19,12 @@ async function verifyJwt(token) {
   const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString());
   if (header.alg !== "EdDSA" || !header.kid) throw Error("invalid_token_header");
   if (!payload.sub) throw Error("invalid_token_subject");
-  if (payload.iss !== ISSUER) throw Error("invalid_token_issuer");
+  if (payload.iss !== ISSUER) {
+    const observedIssuer = typeof payload.iss === "string" ? payload.iss : "";
+    const safeIssuer = /^https:\/\/[a-zA-Z0-9.-]+(?:\/[a-zA-Z0-9/_-]*)?$/.test(observedIssuer) ? observedIssuer.slice(0,240) : "[invalid-format]";
+    console.warn("DEV OAuth issuer mismatch: observed =", safeIssuer, "expected =", ISSUER);
+    throw Error("invalid_token_issuer");
+  }
   if (typeof payload.exp !== "number" || payload.exp <= Date.now()/1000) throw Error("invalid_token_expired");
   const response = await fetch(JWKS);
   if (!response.ok) throw Error("jwks_unavailable");
