@@ -8,6 +8,7 @@ const CALLBACK = new URL(location.pathname, location.origin).toString();
 const DEV_EXTENSION_ID = "ijiihdnkpfngnnoodnnliokgklkondnj";
 const DEV_EXTENSION_ID_CURRENT = "gddjodeedjcpllaphchfjmfleiegncdc";
 const DEV_EXTENSION_ID_INSTALLED = "mcfehbdphboeinbgpgbpifhaophapaog";
+const DEV_EXTENSION_ID_OWNER_CURRENT = "lkdpmcinlhcgleiimnmbfgomdpgmakkh";
 const neonAuth = createInternalNeonAuth(AUTH, { fetchOptions: { credentials: "include" } });
 const auth = neonAuth.adapter;
 const status = document.getElementById("status");
@@ -18,6 +19,7 @@ const CALLBACKS = new Set([
   `https://${DEV_EXTENSION_ID}.chromiumapp.org/tubemind-auth`,
   `https://${DEV_EXTENSION_ID_CURRENT}.chromiumapp.org/tubemind-auth`,
   `https://${DEV_EXTENSION_ID_INSTALLED}.chromiumapp.org/tubemind-auth`,
+  `https://${DEV_EXTENSION_ID_OWNER_CURRENT}.chromiumapp.org/tubemind-auth`,
 ]);
 const FLOW_KEY = "tubemind.extensionAuthFlow";
 const FLOW_TTL_MS = 10 * 60 * 1000;
