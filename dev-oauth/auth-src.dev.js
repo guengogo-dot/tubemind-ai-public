@@ -123,7 +123,9 @@ async function startVerifiedAccountLink() {
       throw new Error("Existing account session could not be verified");
     }
     if (session?.data?.user?.emailVerified !== true) {
-      throw new Error("Verify the email address of your existing account before linking Google.");
+      const sent = await auth.sendVerificationEmail({ email, callbackURL: CALLBACK });
+      if (sent?.error) throw new Error(errorText(sent.error, "Email verification could not be sent"));
+      throw new Error("Verification email requested. Confirm your address, then return to TubeMind and retry linking.");
     }
     setStatus("Connecting Google to your existing account...");
     const linked = await auth.linkSocial({ provider: "google", callbackURL: CALLBACK });
