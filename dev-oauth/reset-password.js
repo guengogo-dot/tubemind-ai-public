@@ -2,6 +2,9 @@ const AUTH = "https://ep-red-boat-b2at0ihs.neonauth.c-6.eu-central-1.aws.neon.te
 const params = new URLSearchParams(location.search);
 const token = params.get("token");
 const error = params.get("error");
+// Remove the recovery token from browser history before any network request.
+// The token remains only in memory for this page session.
+history.replaceState(null, "", location.pathname);
 const form = document.getElementById("reset");
 const status = document.getElementById("status");
 if (!token || error) {
