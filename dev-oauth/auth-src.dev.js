@@ -14,6 +14,7 @@ const status = document.getElementById("status");
 const button = document.getElementById("google");
 const params = new URLSearchParams(location.search);
 const extensionCallback = params.get("extension_callback");
+const linkMode = params.get("mode") === "link";
 const CALLBACKS = new Set([
   `https://${DEV_EXTENSION_ID}.chromiumapp.org/tubemind-auth`,
   `https://${DEV_EXTENSION_ID_CURRENT}.chromiumapp.org/tubemind-auth`,
@@ -28,7 +29,7 @@ function validExtensionCallback(value) {
 function setStatus(value) { if (status) status.textContent = value; }
 function saveFlow(callback) {
   if (!validExtensionCallback(callback)) return false;
-  const flow = JSON.stringify({ callback, createdAt: Date.now() });
+  const flow = JSON.stringify({ callback, mode: linkMode ? "link" : "signin", createdAt: Date.now() });
   sessionStorage.setItem(FLOW_KEY, flow);
   localStorage.setItem(FLOW_KEY, flow);
   return true;
@@ -105,7 +106,52 @@ async function startGoogleSignIn() {
     setStatus(errorText(error, "Sign-in failed"));
   }
 }
-if (button) button.addEventListener("click", startGoogleSignIn);
+async function startVerifiedAccountLink() {
+  // Explicit linking only: the user must sign in with existing credentials
+  // on the trusted DEV auth origin before initiating Google OAuth.
+  const email = document.getElementById("link-email")?.value?.trim();
+  const password = document.getElementById("link-password")?.value;
+  if (!email || !password) { setStatus("Enter your existing account email and password."); return; }
+  if (button) button.disabled = true;
+  setStatus("Verifying existing TubeMind account...");
+  try {
+    const signedIn = await auth.signIn.email({ email, password });
+    if (signedIn?.error) throw new Error(errorText(signedIn.error, "Existing account verification failed"));
+    const session = await auth.getSession();
+    if (session?.error || !session?.data?.session ||
+        session?.data?.user?.email?.toLowerCase() !== email.toLowerCase()) {
+      throw new Error("Existing account session could not be verified");
+    }
+    setStatus("Connecting Google to your existing account...");
+    const linked = await auth.linkSocial({ provider: "google", callbackURL: CALLBACK });
+    if (linked?.error) throw new Error(errorText(linked.error, "Google account linking failed"));
+  } catch (error) {
+    if (button) button.disabled = false;
+    setStatus(errorText(error, "Account linking failed"));
+  }
+}
+function renderLinkForm() {
+  const panel = document.querySelector(".panel");
+  if (!panel || !button) return;
+  const email = document.createElement("input");
+  email.id = "link-email";
+  email.type = "email";
+  email.autocomplete = "username";
+  email.placeholder = "Existing account email";
+  email.required = true;
+  const password = document.createElement("input");
+  password.id = "link-password";
+  password.type = "password";
+  password.autocomplete = "current-password";
+  password.placeholder = "Existing account password";
+  password.required = true;
+  panel.insertBefore(email, button);
+  panel.insertBefore(password, button);
+  button.textContent = "Verify account and connect Google";
+  button.addEventListener("click", startVerifiedAccountLink);
+}
+if (linkMode) renderLinkForm();
+else if (button) button.addEventListener("click", startGoogleSignIn);
 const verifierReturn = params.has("neon_auth_session_verifier");
 if (extensionCallback && !validExtensionCallback(extensionCallback)) {
   setStatus("Unrecognized extension callback. Sign-in was not started.");
@@ -114,5 +160,6 @@ if (extensionCallback && !validExtensionCallback(extensionCallback)) {
   void completeExtensionSignIn();
 } else if (extensionCallback && saveFlow(extensionCallback)) {
   history.replaceState(null, "", location.pathname);
-  void startGoogleSignIn();
+  if (!linkMode) void startGoogleSignIn();
+  else setStatus("Sign in to your existing account to connect Google.");
 }

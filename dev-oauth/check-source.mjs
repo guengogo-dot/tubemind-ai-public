@@ -18,3 +18,8 @@ assert.ok(source.includes("params.has(\"neon_auth_session_verifier\")"), "OAuth 
 assert.ok(source.includes("readFlow()"), "OAuth flow must be recovered from storage");
 assert.ok(source.includes('fetch("/api/dev-auth-exchange?action=issue"'), "code issue endpoint must remain intact");
 console.log("DEV OAuth source invariants: PASS (static only; browser OAuth not tested)");
+
+assert.ok(source.includes("auth.signIn.email({ email, password })"), "linking requires existing credentials");
+assert.ok(source.includes("auth.linkSocial({ provider: \"google\", callbackURL: CALLBACK })"), "explicit Google link required");
+assert.ok(source.includes("session?.data?.user?.email?.toLowerCase() !== email.toLowerCase()"), "verified email required");
+assert.ok(source.includes("if (!linkMode) void startGoogleSignIn()"), "no implicit Google sign-in in link mode");
