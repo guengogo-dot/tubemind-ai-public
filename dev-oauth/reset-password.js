@@ -8,8 +8,9 @@ history.replaceState(null, "", location.pathname);
 const form = document.getElementById("reset");
 const status = document.getElementById("status");
 if (!token || error) {
-  form.hidden = true;
   status.textContent = "This recovery link is invalid or expired. Request a new link from TubeMind AI.";
+} else {
+  form.hidden = false;
 }
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
