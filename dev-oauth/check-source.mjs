@@ -23,3 +23,4 @@ assert.ok(source.includes("auth.signIn.email({ email, password })"), "linking re
 assert.ok(source.includes("auth.linkSocial({ provider: \"google\", callbackURL: CALLBACK })"), "explicit Google link required");
 assert.ok(source.includes("session?.data?.user?.email?.toLowerCase() !== email.toLowerCase()"), "verified email required");
 assert.ok(source.includes("if (!linkMode) void startGoogleSignIn()"), "no implicit Google sign-in in link mode");
+assert.ok(source.includes('session?.data?.user?.emailVerified !== true'), 'unverified email must not be linked');

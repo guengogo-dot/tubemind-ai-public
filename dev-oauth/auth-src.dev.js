@@ -122,6 +122,9 @@ async function startVerifiedAccountLink() {
         session?.data?.user?.email?.toLowerCase() !== email.toLowerCase()) {
       throw new Error("Existing account session could not be verified");
     }
+    if (session?.data?.user?.emailVerified !== true) {
+      throw new Error("Verify the email address of your existing account before linking Google.");
+    }
     setStatus("Connecting Google to your existing account...");
     const linked = await auth.linkSocial({ provider: "google", callbackURL: CALLBACK });
     if (linked?.error) throw new Error(errorText(linked.error, "Google account linking failed"));
